@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/maegames-192.png">
+<link rel="apple-touch-icon" href="icons/maegames-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#05010d">
+<title>MaeGames</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#05010d;color:#fff;font-family:"Press Start 2P",monospace;overflow-x:hidden}
+body{background:radial-gradient(ellipse at 50% -10%,#3b0a5c 0%,#12031f 45%,#05010d 75%)}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.scan{pointer-events:none;position:fixed;inset:0;z-index:5;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 2px,transparent 2px 4px);mix-blend-mode:multiply}
+.vign{pointer-events:none;position:fixed;inset:0;z-index:6;box-shadow:inset 0 0 160px rgba(0,0,0,.9)}
+main{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:34px 18px 60px;text-align:center}
+.top{display:flex;justify-content:space-between;font-size:11px;color:#ff3df0;letter-spacing:1px;margin-bottom:26px}
+.top b{color:#fff;font-weight:400}
+h1{margin:0;font-size:clamp(34px,8vw,84px);line-height:1;color:#fff;letter-spacing:4px;
+  text-shadow:0 0 6px #fff,0 0 14px #ff2ed1,0 0 28px #ff2ed1,0 0 56px #b400ff,4px 4px 0 #3a00a8;animation:flick 6s infinite}
+h1 span{color:#ffe600;text-shadow:0 0 6px #fff,0 0 14px #ffb000,0 0 30px #ff7a00,4px 4px 0 #a83a00}
+@keyframes flick{0%,18%,22%,62%,64%,100%{opacity:1}20%,63%{opacity:.55}}
+.sub{margin:18px 0 8px;font-size:clamp(9px,1.6vw,13px);color:#3df2ff;text-shadow:0 0 8px #00e5ff;letter-spacing:2px}
+.coin{margin:22px 0 34px;font-size:clamp(12px,2.2vw,18px);color:#ffe600;text-shadow:0 0 10px #ff9d00;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;perspective:900px}
+.cab{position:relative;display:block;text-decoration:none;color:#fff;background:linear-gradient(180deg,#1a0633,#0a0218);border:4px solid #ff2ed1;
+  box-shadow:0 0 0 4px #05010d,0 0 0 8px #3df2ff,0 0 30px rgba(255,46,209,.55),inset 0 0 30px rgba(61,242,255,.15);padding:16px 16px 20px;transition:transform .15s}
+.cab:hover,.cab:focus{transform:translateY(-6px) rotateX(4deg);outline:none;box-shadow:0 0 0 4px #05010d,0 0 0 8px #ffe600,0 0 46px rgba(255,230,0,.6),inset 0 0 30px rgba(61,242,255,.2)}
+.cab .marq{font-size:15px;line-height:1.5;color:#ffe600;text-shadow:0 0 8px #ff9d00;margin-bottom:12px}
+.cab canvas{display:block;width:100%;aspect-ratio:16/9;image-rendering:pixelated;border:3px solid #000;background:#000}
+.cab .info{font-size:9px;line-height:1.8;color:#3df2ff;margin:12px 0 14px}
+.btn{display:inline-block;font-size:13px;padding:12px 18px;background:#ff2ed1;color:#fff;border:3px solid #fff;box-shadow:4px 4px 0 #3a00a8;text-shadow:2px 2px 0 #7a0060}
+.cab:hover .btn{background:#ffe600;color:#1a0633;text-shadow:none}
+.cab.soon{border-color:#555;box-shadow:0 0 0 4px #05010d,0 0 0 8px #333;cursor:default;filter:saturate(.3)}
+.cab.soon:hover{transform:none}
+.cab.soon .q{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:44px;color:#666;border:3px dashed #444;animation:pulse 2s infinite}
+@keyframes pulse{50%{color:#aaa}}
+.hs{margin:46px auto 0;max-width:520px;border:3px solid #3df2ff;padding:16px;font-size:10px;line-height:2.2;color:#fff;box-shadow:0 0 18px rgba(61,242,255,.4)}
+.hs h2{font-size:12px;margin:0 0 8px;color:#ff2ed1;text-shadow:0 0 8px #ff2ed1;font-weight:400}
+.hs div{display:flex;justify-content:space-between}
+.hs .g{color:#ffe600}
+footer{margin-top:34px;font-size:9px;color:#8a7aa8;line-height:2}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="scan"></div><div class="vign"></div>
+<main>
+<div class="top"><span>1UP <b>000000</b></span><span>HI-SCORE <b id="hi">050000</b></span><span>CREDIT <b id="cr">00</b></span></div>
+<h1>MAE<span>GAMES</span></h1>
+<div class="sub">SALA GIOCHI ONLINE DI LUIGI MAESANO</div>
+<div class="coin">INSERT COIN</div>
+<div class="grid">
+<a class="cab" href="angry-musician/">
+<div class="marq">ANGRY<br>MUSICIAN</div>
+<canvas id="t1" width="192" height="108"></canvas>
+<div class="info">PICCHIADURO · 1 GIOCATORE<br>IL MUSICISTA CONTRO<br>IL REGISTA INCAZZATO</div>
+<span class="btn">▶ GIOCA</span>
+</a>
+<a class="cab" href="spare-mic/">
+<div class="marq">SPARE<br>MIC</div>
+<canvas id="t2" width="192" height="108"></canvas>
+<div class="info">ARCADE ACTION · 1 GIOCATORE<br>L'ATTORE DI MUSICAL<br>CONTRO IL MICROFONO ROTTO</div>
+<span class="btn">▶ GIOCA</span>
+</a><div class="cab soon"><div class="marq">COMING<br>SOON</div><div class="q">?</div><div class="info">NUOVO GIOCO<br>IN ARRIVO...</div><span class="btn" style="background:#333;box-shadow:none">LOCKED</span></div>
+</div>
+<div class="hs"><h2>— HALL OF FAME —</h2>
+<div><span>1ST</span><span class="g">MAE</span><span>050000</span></div>
+<div><span>2ND</span><span class="g">REG</span><span>032000</span></div>
+<div><span>3RD</span><span class="g">BAS</span><span>018500</span></div>
+</div>
+<div id="inst" style="display:none;margin-top:34px"><a class="btn" href="#" id="instb" style="background:#7dff8a;color:#05010d;text-decoration:none;text-shadow:none">⬇ INSTALLA COME APP</a></div>
+<footer>© 2026 MAEGAMES · PRESS START<br>GIOCA DA TELEFONO IN ORIZZONTALE O DA COMPUTER</footer>
+</main>
+<script>
+(function(){
+var c=document.getElementById('stars'),x=c.getContext('2d'),S=[];
+function rs(){c.width=innerWidth;c.height=innerHeight;S=[];for(var i=0;i<140;i++)S.push([Math.random()*c.width,Math.random()*c.height,Math.random()*2+.5]);}
+addEventListener('resize',rs);rs();
+var t=0;
+function fr(){t++;x.fillStyle='rgba(5,1,13,.6)';x.fillRect(0,0,c.width,c.height);
+var hz=c.height*.72;x.strokeStyle='rgba(255,46,209,.35)';x.lineWidth=1;
+for(var i=-20;i<=20;i++){x.beginPath();x.moveTo(c.width/2+i*20,hz);x.lineTo(c.width/2+i*160,c.height);x.stroke();}
+for(var j=0;j<14;j++){var y=hz+Math.pow((j+(t%40)/40)/14,2)*(c.height-hz);x.beginPath();x.moveTo(0,y);x.lineTo(c.width,y);x.stroke();}
+for(var k=0;k<S.length;k++){var s=S[k];s[0]-=s[2]*.4;if(s[0]<0)s[0]=c.width;if(s[1]<hz){x.fillStyle=(k%7==0)?'#3df2ff':'#fff';x.fillRect(s[0],s[1],s[2],s[2]);}}
+requestAnimationFrame(fr);}
+fr();
+// anteprima pixel del gioco
+var p=document.getElementById('t1').getContext('2d'),f=0;
+function px(a,b,w,h,col){p.fillStyle=col;p.fillRect(a,b,w,h);}
+function guy(a,dir,col,hat,fr){var b=Math.round(Math.sin(fr*.2)*1);
+px(a-4,52+b,8,8,'#f1c38e');if(hat)px(a-6,49+b,12,4,'#111');else px(a-5,49+b,10,4,'#3a2414');
+px(a-6,60+b,12,16,col);px(a-6,76,5,14,hat?'#555':'#2c4f96');px(a+1,76,5,14,hat?'#555':'#2c4f96');
+px(a+dir*6,62+b,8*dir,4,col);}
+function tick(){f++;p.fillStyle='#2c1a33';p.fillRect(0,0,192,108);
+px(0,90,192,18,'#5c3a1e');px(0,0,14,108,'#8f0f24');px(178,0,14,108,'#8f0f24');
+p.fillStyle='rgba(255,214,130,.18)';p.beginPath();p.moveTo(90,0);p.lineTo(110,0);p.lineTo(140,90);p.lineTo(60,90);p.fill();
+guy(60,1,'#161616',false,f);guy(132,-1,'#c9a66b',true,f+10);
+var ix=70+((f*2)%60);px(ix,64,8,3,'#f2c230');px(ix+6,62,3,7,'#f2c230');
+var cx=122-((f*2+30)%60);px(cx,70,8,2,'#111');px(cx-3,68,4,6,'#8a8f98');
+p.fillStyle='#ffe600';p.font='8px "Press Start 2P",monospace';p.fillText('VS',88,24);
+setTimeout(function(){requestAnimationFrame(tick)},50);}
+tick();
+var q=document.getElementById('t2').getContext('2d'),g2=0;
+function q2(){g2++;q.fillStyle='#0b1a33';q.fillRect(0,0,192,108);q.fillStyle='#3d2a50';q.fillRect(0,92,192,16);
+var mx=110+Math.sin(g2*.05)*45,my=46+Math.sin(g2*.11)*4;q.fillStyle='#222';q.fillRect(mx-4,my+10,8,18);q.fillStyle='#b7bdc6';q.fillRect(mx-11,my-11,22,22);q.fillStyle='#ff2a6a';q.fillRect(mx-8,my-4,6,3);q.fillRect(mx+2,my-4,6,3);
+var ax=mx-30;q.fillStyle='#c8102e';q.fillRect(ax-5,72,10,14);q.fillStyle='#f4f1e8';q.fillRect(ax-6,70,12,3);q.fillStyle='#f1c38e';q.fillRect(ax-4,62,8,8);q.fillStyle='#1d1208';q.fillRect(ax-4,60,8,3);q.fillStyle='#141414';q.fillRect(ax-5,86,4,6);q.fillRect(ax+1,86,4,6);
+if(g2%30<10){q.fillStyle='#f1c38e';q.fillRect(ax+5,62,8,6);q.fillStyle='#fff';q.font='7px "Press Start 2P",monospace';q.fillText('SLAP!',ax+10,40)}
+if(g2%60<14){q.fillStyle='#fff6a0';q.fillRect(160,0,3,92)}else if(g2%60<40){q.fillStyle='rgba(255,210,63,.8)';q.fillRect(156,86,10,6)}
+q.fillStyle='#ff2a2a';q.fillRect(80,6,32,9);q.fillStyle='#fff';q.font='6px "Press Start 2P",monospace';q.fillText('ON AIR',82,13);
+setTimeout(function(){requestAnimationFrame(q2)},50);}
+q2();
+var ie=null;addEventListener('beforeinstallprompt',function(e){e.preventDefault();ie=e;document.getElementById('inst').style.display='block'});
+document.getElementById('instb').addEventListener('click',function(e){e.preventDefault();if(ie){ie.prompt();ie=null;document.getElementById('inst').style.display='none'}});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+var cr=0;document.addEventListener('click',function(){cr=Math.min(99,cr+1);document.getElementById('cr').textContent=(cr<10?'0':'')+cr;});
+})();
+</script>
+</body>
+</html>
