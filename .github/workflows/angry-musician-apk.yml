@@ -30,8 +30,8 @@ jobs:
       - name: Pubblica release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: angry-musician-v2
-          name: Angry Musician v2 (retro)
+          tag_name: angry-musician-v3
+          name: Angry Musician v3 (pixel art)
           body: "APK per Android di Angry Musician con grafica retro a pixel. Scarica AngryMusician.apk e installalo sul telefono."
           files: AngryMusician.apk
           make_latest: true
