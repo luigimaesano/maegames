@@ -1,0 +1,25 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'it.maegames.angrymusician'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'it.maegames.angrymusician'
+        minSdk 24
+        targetSdk 34
+        versionCode 2
+        versionName '2.0-retro'
+    }
+    signingConfigs {
+        fisso {
+            storeFile file('maegames.keystore')
+            storePassword 'maegames'
+            keyAlias 'maegames'
+            keyPassword 'maegames'
+        }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.fisso }
+        debug { signingConfig signingConfigs.fisso }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
